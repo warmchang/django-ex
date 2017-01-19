@@ -37,7 +37,7 @@ RUN yum install -y centos-release-scl && \
     scl enable rh-python35 bash && \
     yum clean all -y
 
-COPY ./ /
+COPY ./ /opt/app-root/src/
 
 # In order to drop the root user, we have to make some directories world
 # writable as OpenShift default security model is to run the container under
@@ -47,4 +47,4 @@ RUN chown -R 1001:0 /opt/app-root && chmod -R og+rwx /opt/app-root
 USER 1001
 
 # Set the default CMD to print the usage of the language image.
-CMD python /SmartStock/manage.py runserver 0.0.0.0:8080
+CMD python /opt/app-root/src/SmartStock/manage.py runserver 0.0.0.0:8080
