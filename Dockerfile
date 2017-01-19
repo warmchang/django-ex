@@ -35,6 +35,7 @@ RUN yum install -y centos-release-scl && \
     # size smaller.
     rpm -e --nodeps centos-logos && \
     scl enable rh-python35 bash && \
+    pip install -r requirements.txt && \
     yum clean all -y
 
 COPY ./ /opt/app-root/src/
@@ -47,4 +48,4 @@ RUN chown -R 1001:0 /opt/app-root && chmod -R og+rwx /opt/app-root
 USER 1001
 
 # Set the default CMD to print the usage of the language image.
-CMD python ./manage.py runserver 0.0.0.0:8080
+CMD run.sh
