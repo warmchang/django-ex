@@ -14,7 +14,8 @@ LABEL io.k8s.description="Platform for building and running Python 3.5 applicati
       io.openshift.expose-services="8080:http" \
       io.openshift.tags="builder,python,python35,rh-python35"
 
-RUN yum install -y centos-release-scl-rh && \
+RUN whoami && \
+    yum install -y centos-release-scl-rh && \
     yum-config-manager --enable centos-sclo-rh-testing && \
     INSTALL_PKGS="rh-python35 rh-python35-python-devel rh-python35-python-setuptools rh-python35-python-pip \
 	 nss_wrapper httpd httpd-devel atlas-devel gcc-gfortran libffi-devel libtool-ltdl" && \
