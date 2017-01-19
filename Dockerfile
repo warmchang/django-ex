@@ -14,15 +14,27 @@ LABEL io.k8s.description="Platform for building and running Python 3.5 applicati
       io.openshift.expose-services="8080:http" \
       io.openshift.tags="builder,python,python35,rh-python35"
 
-RUN yum install -y centos-release-scl-rh && \
-    yum-config-manager --enable centos-sclo-rh-testing && \
+# RUN yum install -y centos-release-scl-rh && \
+#     yum-config-manager --enable centos-sclo-rh-testing && \
+#     INSTALL_PKGS="rh-python35 rh-python35-python-devel rh-python35-python-setuptools rh-python35-python-pip \
+#      nss_wrapper httpd httpd-devel atlas-devel gcc-gfortran libffi-devel libtool-ltdl libxslt-devel" && \
+#     yum install -y --setopt=tsflags=nodocs --enablerepo=centosplus $INSTALL_PKGS && \
+#     rpm -V $INSTALL_PKGS && \
+#     # Remove centos-logos (httpd dependency, ~20MB of graphics) to keep image
+#     # size smaller.
+#     rpm -e --nodeps centos-logos && \
+#     yum clean all -y
+
+RUN yum install -y centos-release-scl && \
+    yum-config-manager --enable rhel-server-rhscl-7-rpms && \
     INSTALL_PKGS="rh-python35 rh-python35-python-devel rh-python35-python-setuptools rh-python35-python-pip \
      nss_wrapper httpd httpd-devel atlas-devel gcc-gfortran libffi-devel libtool-ltdl libxslt-devel" && \
-    yum install -y --setopt=tsflags=nodocs --enablerepo=centosplus $INSTALL_PKGS && \
+    yum install -y $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     # Remove centos-logos (httpd dependency, ~20MB of graphics) to keep image
     # size smaller.
     rpm -e --nodeps centos-logos && \
+    scl enable rh-python35 bash && \
     yum clean all -y
 
 COPY ./ /
