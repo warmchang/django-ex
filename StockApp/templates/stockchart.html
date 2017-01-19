@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <meta charset="utf-8">
+            <!-- 新 Bootstrap 核心 CSS 文件 -->
+            <link href="/static/stockapp/css/bootstrap.min.css" rel="stylesheet">
+                <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+                <link href="/static/stockapp/css/bootstrap-theme.min.css" rel="stylesheet">
+                    <!-- 引入 ECharts 文件 -->
+                    <script src="/static/stockapp/js/echarts.min.js">
+                    </script>
+                    <script src="/static/stockapp/js/charttheme/dark.js">
+                    </script>
+                    <script src="/static/stockapp/js/charttheme/infographic.js">
+                    </script>
+                    <script src="/static/stockapp/js/charttheme/macarons.js">
+                    </script>
+                    <script src="/static/stockapp/js/charttheme/roma.js">
+                    </script>
+                    <script src="/static/stockapp/js/charttheme/shine.js">
+                    </script>
+                    <script src="/static/stockapp/js/charttheme/vintage.js">
+                    </script>
+                    <script src="/static/stockapp/js/jquery.min.js">
+                    </script>
+                    <script src="/static/stockapp/js/stockapp.js">
+                    </script>
+                    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+                    <script src="/static/stockapp/js/bootstrap.min.js">
+                    </script>
+                </link>
+            </link>
+        </meta>
+    </header>
+    <body>
+        <div class=".container">
+            <div class="row">
+                <div class=".col-sm-1 col-md-1 ">
+                </div>
+                <div class=".col-sm-10 col-md-10 ">
+                    <!-- 为ECharts准备一个具备大小（宽高）的Dom style="width: 800px;height:600px;"-->
+                    <div id="main" style="height:800px;">
+                    </div>
+                </div>
+                <div class=".col-sm-1 col-md-1 ">
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'),'shine');
+        myChart.showLoading();
+
+        getsetdayk(myChart,'/stockapp/getchartjson/{{code}}/');
+        </script>
+    </body>
+</html>
