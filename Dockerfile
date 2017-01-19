@@ -21,7 +21,9 @@ RUN yum install -y centos-release-scl && \
     yum install -y $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     rpm -e --nodeps centos-logos && \
+    python --version && \
     scl enable rh-python35 bash && \
+    python --version && \
     easy_install Django && \
     easy_install lxml && \
     easy_install tushare && \
