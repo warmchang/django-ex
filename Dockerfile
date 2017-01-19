@@ -22,7 +22,9 @@ RUN yum install -y centos-release-scl && \
     rpm -V $INSTALL_PKGS && \
     rpm -e --nodeps centos-logos && \
     scl enable rh-python35 bash && \
-    pip3 install -r requirements.txt && \
+    easy_install Django && \
+    easy_install lxml && \
+    easy_install tushare && \
     yum clean all -y
 
 COPY ./ /opt/app-root/src/
